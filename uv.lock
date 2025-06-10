@@ -401,6 +401,19 @@ wheels = [
 ]
 
 [[package]]
+name = "ollama"
+version = "0.5.1"
+source = { registry = "https://pypi.org/simple" }
+dependencies = [
+    { name = "httpx" },
+    { name = "pydantic" },
+]
+sdist = { url = "https://files.pythonhosted.org/packages/8d/96/c7fe0d2d1b3053be614822a7b722c7465161b3672ce90df71515137580a0/ollama-0.5.1.tar.gz", hash = "sha256:5a799e4dc4e7af638b11e3ae588ab17623ee019e496caaf4323efbaa8feeff93", size = 41112 }
+wheels = [
+    { url = "https://files.pythonhosted.org/packages/d6/76/3f96c8cdbf3955d7a73ee94ce3e0db0755d6de1e0098a70275940d1aff2f/ollama-0.5.1-py3-none-any.whl", hash = "sha256:4c8839f35bc173c7057b1eb2cbe7f498c1a7e134eafc9192824c8aecb3617506", size = 13369 },
+]
+
+[[package]]
 name = "openai"
 version = "1.65.3"
 source = { registry = "https://pypi.org/simple" }
@@ -606,6 +619,7 @@ dependencies = [
     { name = "flask-cors" },
     { name = "flask-sqlalchemy" },
     { name = "gunicorn" },
+    { name = "ollama" },
     { name = "openai" },
     { name = "pillow" },
     { name = "psycopg2-binary" },
@@ -621,6 +635,7 @@ requires-dist = [
     { name = "flask-cors", specifier = ">=5.0.1" },
     { name = "flask-sqlalchemy", specifier = ">=3.1.1" },
     { name = "gunicorn", specifier = ">=23.0.0" },
+    { name = "ollama", specifier = ">=0.5.1" },
     { name = "openai", specifier = ">=1.65.3" },
     { name = "pillow", specifier = ">=11.1.0" },
     { name = "psycopg2-binary", specifier = ">=2.9.10" },

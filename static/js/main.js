@@ -260,7 +260,12 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => response.json())
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+                return response.json();
+            })
             .then(data => {
                 clearInterval(progressInterval);
 
@@ -324,6 +329,10 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             });
+
+            if (!response.ok) {
+                throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+            }
 
             const data = await response.json();
             clearInterval(progressInterval);

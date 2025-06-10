@@ -1,5 +1,6 @@
 {pkgs}: {
   deps = [
+    pkgs.ollama
     pkgs.zlib
     pkgs.tk
     pkgs.tcl

@@ -2,10 +2,11 @@ modules = ["python-3.11", "postgresql-16"]
 
 [nix]
 channel = "stable-24_05"
+packages = ["freetype", "lcms2", "libimagequant", "libjpeg", "libtiff", "libwebp", "libxcrypt", "openjpeg", "tcl", "tk", "zlib"]
 
 [deployment]
 deploymentTarget = "autoscale"
-run = ["sh", "-c", "gunicorn --bind 0.0.0.0:5000 --workers 3 app:app"]
+run = ["sh", "-c", "gunicorn --bind 0.0.0.0:5000 main:app"]
 
 [workflows]
 runButton = "Project"

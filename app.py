@@ -971,5 +971,40 @@ def reanalyze_image(image_id):
 
 app.register_blueprint(unity_api, url_prefix='/api/unity') # Blueprint registration
 
+# Add comprehensive error handling for deployment
+@app.errorhandler(500)
+def internal_error(error):
+    logger.error(f"500 Internal Server Error: {str(error)}")
+    logger.error(f"Request URL: {request.url if request else 'Unknown'}")
+    logger.error(f"Request method: {request.method if request else 'Unknown'}")
+    logger.error(f"Is deployment: {os.environ.get('REPLIT_DEPLOYMENT') == '1'}")
+    
+    if os.environ.get('REPLIT_DEPLOYMENT') == '1':
+        return jsonify({
+            "error": "Internal server error",
+            "message": "The server encountered an error processing your request"
+        }), 500
+    else:
+        return f"Internal Server Error: {str(error)}", 500
+
+@app.errorhandler(404)
+def not_found_error(error):
+    logger.warning(f"404 Not Found: {request.url if request else 'Unknown URL'}")
+    return jsonify({"error": "Page not found"}), 404
+
+@app.errorhandler(Exception)
+def handle_unexpected_error(e):
+    logger.error(f"Unexpected error: {str(e)}")
+    logger.error(f"Error type: {type(e).__name__}")
+    logger.error(f"Request URL: {request.url if request else 'Unknown'}")
+    
+    if os.environ.get('REPLIT_DEPLOYMENT') == '1':
+        return jsonify({
+            "error": "An unexpected error occurred",
+            "type": type(e).__name__
+        }), 500
+    else:
+        raise e
+
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=5000, debug=True)
