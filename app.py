@@ -3,8 +3,8 @@ import logging
 import json
 from flask import Flask, render_template, request, jsonify, url_for, redirect, flash
 from dotenv import load_dotenv
-from services.local_llm_service import analyze_artwork, generate_image_description
-from services.local_story_maker import generate_story, get_story_options
+from services.openai_service import analyze_artwork, generate_image_description
+from services.story_maker import generate_story, get_story_options
 from database import db
 from models import AIInstruction, ImageAnalysis, StoryGeneration, StoryNode
 from flask_cors import CORS
